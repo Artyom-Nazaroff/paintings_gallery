@@ -1,0 +1,75 @@
+.paginationWrapper {
+  width: 280px;
+  height: 41px;
+  display: flex;
+  margin: 0 auto;
+  user-select: none;
+}
+
+.paginationButton {
+  height: 100%;
+  width: 41px;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #464646;
+  }
+
+  &:not(:last-child) {
+    border-right: 1px solid white;
+  }
+  &:not(:last-child).disabled {
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  &:first-child {
+    border-left: 1px solid white;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+  &:first-child.disabled {
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  &:last-child {
+    border-right: 1px solid white;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  &:last-child.disabled {
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  &:nth-child(1),
+  &:nth-child(2) {
+    img {
+      transform: rotateZ(180deg);
+    }
+  }
+}
+
+.disabled {
+  pointer-events: none;
+  border-color: rgba(255, 255, 255, 0.3);
+  &:hover {
+    background-color: inherit;
+  }
+}
+
+.active {
+  background-color: white;
+  color: black;
+  &:hover {
+    background-color: white;
+  }
+}
+
+@media (min-width: 640px) {
+  .paginationWrapper {
+    margin: 0;
+  }
+}
