@@ -2,7 +2,6 @@ import React from 'react';
 import styles from "./Pictures.module.scss";
 
 const Pictures = ({paintings, authors, locations}) => {
-
     // Использовать useMemo();
     const identifyAuthor = (id) => {
         const author = authors.filter(item => item.id === id)[0];

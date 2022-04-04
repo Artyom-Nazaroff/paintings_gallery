@@ -3,14 +3,18 @@ import styles from './SelectList.module.scss';
 import cn from 'classnames';
 import arrow from '../../assets/images/select-arrow.svg';
 
-const SelectList = ({inputText, items}) => {
+const SelectList = ({inputText, items, chooseAuthor, chooseLocation}) => {
     const [isOpened, setIsOpened] = useState(false);
     const [inputItem, setInputItem] = useState(inputText);
-    const [pic, setPic] = useState(null);
 
-    const chooseItem = (name, location) => {
-        setInputItem(name || location);
+    const chooseItem = (item, id) => {
+        setInputItem(item);
         setIsOpened(false);
+        if (inputText === 'Author') {
+            chooseAuthor(id);
+        } else if (inputText === 'Location') {
+            chooseLocation(id);
+        }
     };
     // window.addEventListener('click', () => {
     //     if (isOpened) setIsOpened(false);
@@ -44,7 +48,7 @@ const SelectList = ({inputText, items}) => {
                         items.map(item =>
                             <li
                                 key={item.id}
-                                onClick={() => chooseItem(item.name || item.location)}
+                                onClick={() => chooseItem((item.name || item.location), item.id)}
                             >
                                 {item.name || item.location}
                             </li>)

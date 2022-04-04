@@ -3,10 +3,10 @@ import Pagination from "./Pagination";
 import {connect} from "react-redux";
 import {getPictures} from "../../store/gallery/galleryReducer";
 
-const PaginationContainer = ({currentPage, pageSize, totalItemsCount, getPictures}) => {
+const PaginationContainer = ({currentPage, pageSize, totalItemsCount, searchQuery, getPictures}) => {
 
     const onPageChanged = (page) => {
-        getPictures(pageSize, page);
+        getPictures(searchQuery, pageSize, page);
     };
 
     return (
@@ -25,6 +25,7 @@ const mapStateToProps = state => ({
     currentPage: state.gallery.currentPage,
     pageSize: state.gallery.pageSize,
     totalItemsCount: state.gallery.totalItemsCount,
+    searchQuery: state.gallery.searchQuery,
 });
 
 export default connect(mapStateToProps, {getPictures})(PaginationContainer);

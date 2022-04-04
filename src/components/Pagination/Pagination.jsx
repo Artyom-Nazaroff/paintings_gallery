@@ -22,9 +22,7 @@ const Pagination = ({currentPage, pageSize, totalItemsCount, onPageChanged}) => 
     useMemo(() => {
         const pagesCount = Math.ceil(totalItemsCount / pageSize);
         const pages = [];
-        for (let i = 1; i <= pagesCount; i++) {
-            pages.push(i);
-        }
+        for (let i = 1; i <= pagesCount; i++) pages.push(i);
         setPagesArray(pages);
         setPortionsAmount(pagesCount - 2);
    }, [pageSize, totalItemsCount]);

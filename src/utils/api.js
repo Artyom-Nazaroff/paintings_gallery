@@ -5,9 +5,10 @@ const instance = axios.create({
 });
 
 export const api = {
-    getPaintings(pageSize, currentPage) {
+    getPaintings(str = '', pageSize, currentPage) {
         return instance.get(`paintings`, {
             params: {
+                q: str,
                 _limit: pageSize,
                 _page: currentPage,
             }
@@ -19,16 +20,27 @@ export const api = {
     getLocations() {
         return instance.get(`locations`);
     },
-
-
-    // follow(userId) {
-    //     return instance.post(`follow/${userId}`);
-    // },
-    // unfollow(userId) {
-    //     return instance.delete(`follow/${userId}`);
-    // },
-    // getUserProfile(userId) {
-    //     console.warn('Obsolete method. Please, use profileAPI object');
-    //     return profileAPI.getUserProfile(userId);
-    // },
+    getAuthorPaintings(id) {
+        return instance.get(`paintings`, {
+            params: {
+                authorId: id,
+            }
+        });
+    },
+    getLocationPaintings(id) {
+        return instance.get(`paintings`, {
+            params: {
+                locationId: id,
+            }
+        });
+    },
+    searchPainting(str, page, pageSize) {
+        return instance.get(`paintings`, {
+            params: {
+                q: str,
+                _page: page,
+                _limit: pageSize,
+            }
+        });
+    },
 };
