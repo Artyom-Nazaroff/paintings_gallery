@@ -1,16 +1,25 @@
 import React from 'react';
 import SelectList from "./SelectList";
 import {connect} from "react-redux";
-import {setAuthor, setLocation} from "../../store/gallery/galleryReducer";
+import {
+    getPaintingsBySearchQuery,
+    setAuthor,
+    setAuthorQuery,
+    setLocation,
+    setLocationQuery
+} from "../../store/gallery/galleryReducer";
 
 
-const SelectListContainer = ({inputText, items, setAuthor, setLocation}) => {
+const SelectListContainer = ({inputText, items, pageSize, searchQuery, authorId, locationId, createdFrom, createdBefore,
+                                 setAuthor, setLocation, setAuthorQuery, setLocationQuery, getPaintingsBySearchQuery}) => {
 
-    const chooseAuthor = (id) => {
-        setAuthor(id);
+    const chooseAuthor = (id, page) => {
+        setAuthorQuery(id);
+        getPaintingsBySearchQuery(searchQuery, id, locationId, createdFrom, createdBefore, page, pageSize);
     };
-    const chooseLocation = (id) => {
-        setLocation(id);
+    const chooseLocation = (id, page) => {
+        setLocationQuery(id);
+        getPaintingsBySearchQuery(searchQuery, authorId, id, createdFrom, createdBefore, page, pageSize);
     };
 
     return (
@@ -25,6 +34,15 @@ const SelectListContainer = ({inputText, items, setAuthor, setLocation}) => {
     );
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+    pageSize: state.gallery.pageSize,
+    searchQuery: state.gallery.filter.searchQuery,
+    authorId: state.gallery.filter.authorId,
+    locationId: state.gallery.filter.locationId,
+    createdFrom: state.gallery.filter.createdFrom,
+    createdBefore: state.gallery.filter.createdBefore,
+});
 
-export default connect(mapStateToProps, {setAuthor, setLocation})(SelectListContainer);
+export default connect(mapStateToProps,
+    {setAuthor, setLocation, setAuthorQuery, setLocationQuery, getPaintingsBySearchQuery})
+(SelectListContainer);

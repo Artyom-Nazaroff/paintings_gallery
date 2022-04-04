@@ -1,12 +1,25 @@
 import React from 'react';
 import Pagination from "./Pagination";
 import {connect} from "react-redux";
-import {getPictures} from "../../store/gallery/galleryReducer";
+import {getPaintingsBySearchQuery, getPictures, setCurrentPage} from "../../store/gallery/galleryReducer";
 
-const PaginationContainer = ({currentPage, pageSize, totalItemsCount, searchQuery, getPictures}) => {
+const PaginationContainer = ({
+                                 currentPage,
+                                 pageSize,
+                                 totalItemsCount,
+                                 searchQuery,
+                                 authorId,
+                                 locationId,
+                                 createdFrom,
+                                 createdBefore,
+                                 getPictures,
+                                 setCurrentPage,
+                                 getPaintingsBySearchQuery
+                             }) => {
 
     const onPageChanged = (page) => {
-        getPictures(searchQuery, pageSize, page);
+        setCurrentPage(page);
+        getPaintingsBySearchQuery(searchQuery, authorId, locationId, createdFrom, createdBefore, page, pageSize);
     };
 
     return (
@@ -21,11 +34,18 @@ const PaginationContainer = ({currentPage, pageSize, totalItemsCount, searchQuer
     );
 };
 
-const mapStateToProps = state => ({
-    currentPage: state.gallery.currentPage,
-    pageSize: state.gallery.pageSize,
-    totalItemsCount: state.gallery.totalItemsCount,
-    searchQuery: state.gallery.searchQuery,
-});
+const mapStateToProps = state => {
 
-export default connect(mapStateToProps, {getPictures})(PaginationContainer);
+    return {
+        currentPage: state.gallery.currentPage,
+        pageSize: state.gallery.pageSize,
+        totalItemsCount: state.gallery.totalItemsCount,
+        searchQuery: state.gallery.filter.searchQuery,
+        authorId: state.gallery.filter.authorId,
+        locationId: state.gallery.filter.locationId,
+        createdFrom: state.gallery.filter.createdFrom,
+        createdBefore: state.gallery.filter.createdBefore,
+    }
+};
+
+export default connect(mapStateToProps, {getPictures, setCurrentPage, getPaintingsBySearchQuery})(PaginationContainer);

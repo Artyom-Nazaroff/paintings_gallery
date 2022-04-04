@@ -4,10 +4,10 @@ import cn from 'classnames';
 import logo from '../../assets/images/logo.svg';
 import switcher from '../../assets/images/switcher.svg';
 import Pictures from "../Pictures/Pictures";
-import SelectRange from "../SelectRange/SelectRange";
 import PaginationContainer from "../Pagination/PaginationContainer";
 import SelectListContainer from "../SelectList/SelectListContainer";
 import SearchInput from "../SearchInput/SearchInput";
+import SelectRangeContainer from "../SelectRange/SelectRangeContainer";
 
 const Gallery = ({authors, locations, paintings, searchPaintings}) => {
     return (
@@ -33,7 +33,7 @@ const Gallery = ({authors, locations, paintings, searchPaintings}) => {
                         inputText={'Location'}
                         items={locations}
                     />
-                    <SelectRange inputText={'Created'}/>
+                    <SelectRangeContainer inputText={'Created'}/>
                 </div>
                 <Pictures
                     paintings={paintings}

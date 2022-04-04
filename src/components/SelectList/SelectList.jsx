@@ -11,9 +11,9 @@ const SelectList = ({inputText, items, chooseAuthor, chooseLocation}) => {
         setInputItem(item);
         setIsOpened(false);
         if (inputText === 'Author') {
-            chooseAuthor(id);
+            chooseAuthor(id, 1);
         } else if (inputText === 'Location') {
-            chooseLocation(id);
+            chooseLocation(id, 1);
         }
     };
     // window.addEventListener('click', () => {
