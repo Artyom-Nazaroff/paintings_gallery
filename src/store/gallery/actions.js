@@ -23,7 +23,6 @@ export const setCreatedBefore = (year) => ({type: SET_CREATED_BEFORE, year});
 
 export const getAllInformation = (filter, pageSize, currentPage) => async dispatch => {
     const paintings = await api.searchQuery(filter, pageSize, currentPage);
-    // const paintings = await api.getPaintings(pageSize, currentPage);
     dispatch(setTotalItemsCount(paintings.headers['x-total-count']));
     const authors = await api.getAuthors();
     const locations = await api.getLocations();
