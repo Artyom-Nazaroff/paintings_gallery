@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/paintings_gallery/static/css/main.8cc6cad3.css",
+    "main.js": "/paintings_gallery/static/js/main.1ff9445b.js",
+    "static/media/logo.svg": "/paintings_gallery/static/media/logo.f77c03b8bdcfbe49493167759ccfd594.svg",
+    "index.html": "/paintings_gallery/index.html",
+    "main.8cc6cad3.css.map": "/paintings_gallery/static/css/main.8cc6cad3.css.map",
+    "main.1ff9445b.js.map": "/paintings_gallery/static/js/main.1ff9445b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8cc6cad3.css",
+    "static/js/main.1ff9445b.js"
+  ]
+}
