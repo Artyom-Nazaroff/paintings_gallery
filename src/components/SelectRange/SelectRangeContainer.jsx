@@ -5,13 +5,13 @@ import SelectRange from "./SelectRange";
 import * as PropTypes from "prop-types";
 
 
-const SelectRangeContainer = ({inputText, pageSize, searchQuery, authorId, locationId,
-                                  getPaintingsBySearchQuery, setCreatedFrom, setCreatedBefore}) => {
+const SelectRangeContainer = ({inputText, pageSize, filter, getPaintingsBySearchQuery, setCreatedFrom, setCreatedBefore}) => {
 
     const chooseDatesRange = (from = null, before = null, page) => {
         setCreatedFrom(from);
         setCreatedBefore(before);
-        getPaintingsBySearchQuery(searchQuery, authorId, locationId, from, before, page, pageSize);
+        const newFilter = {...filter, createdFrom: from, createdBefore: before};
+        getPaintingsBySearchQuery(newFilter, pageSize, page);
     };
 
     return (
@@ -27,19 +27,20 @@ const SelectRangeContainer = ({inputText, pageSize, searchQuery, authorId, locat
 SelectRangeContainer.propTypes = {
     inputText: PropTypes.string,
     pageSize: PropTypes.number,
-    searchQuery: PropTypes.string,
-    authorId: PropTypes.number,
-    locationId: PropTypes.number,
-    setCreatedFrom: PropTypes.func,
-    setCreatedBefore: PropTypes.func,
+    filter: PropTypes.shape({
+        searchQuery: PropTypes.string,
+        authorId: PropTypes.number || PropTypes.object,
+        locationId: PropTypes.number || PropTypes.object,
+        createdFrom: PropTypes.string || PropTypes.object,
+        createdBefore: PropTypes.string || PropTypes.object,
+    }),
     getPaintingsBySearchQuery: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
     pageSize: state.gallery.pageSize,
     searchQuery: state.gallery.filter.searchQuery,
-    authorId: state.gallery.filter.authorId,
-    locationId: state.gallery.filter.locationId,
+    filter: state.gallery.filter,
 });
 
 export default connect(mapStateToProps,

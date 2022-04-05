@@ -4,22 +4,48 @@ import {connect} from "react-redux";
 import {getAllInformation, getPaintingsBySearchQuery, setSearchQuery} from "../../store/gallery/actions";
 import * as PropTypes from "prop-types";
 import {ThemeContext} from "../../context/themeContext";
+import { createBrowserHistory } from "history";
+import queryString from "query-string";
 
 const GalleryContainer =
-    ({paintings, authors, locations, currentPage, pageSize, authorId, locationId,
-         createdFrom, createdBefore, getAllInformation, setSearchQuery, getPaintingsBySearchQuery}) => {
-
-        const {lightTheme, setLightTheme} = useContext(ThemeContext);
+    ({paintings, authors, locations, currentPage, pageSize, filter, getAllInformation, setSearchQuery, getPaintingsBySearchQuery}) => {
 
         useEffect(() => {
-            getAllInformation(pageSize, currentPage);
+            const queryString = require('query-string');
+            const parsed = queryString.parse(createBrowserHistory().location.search);
+
+            let actualFilter = filter;
+            if (parsed.searchQuery) actualFilter = {...actualFilter, searchQuery: parsed.searchQuery};
+            if (parsed.authorId !== 'null') actualFilter = {...actualFilter, authorId: parsed.authorId};
+            if (parsed.locationId !== 'null') actualFilter = {...actualFilter, locationId: parsed.locationId};
+            if (parsed.createdFrom !== 'null') actualFilter = {...actualFilter, createdFrom: parsed.createdFrom};
+            if (parsed.createdBefore !== 'null') actualFilter = {...actualFilter, createdBefore: parsed.createdBefore};
+
+            getAllInformation(actualFilter, pageSize, currentPage);
         }, []);
+
+        useEffect(() => {
+            const query = {};
+            if (filter.searchQuery) query.q = filter.searchQuery;
+            if (filter.authorId !== null) query.authorId = filter.authorId;
+            if (filter.locationId !== null) query.locationId = filter.locationId;
+            if (filter.createdFrom !== null) query.created_gte = filter.createdFrom;
+            if (filter.createdBefore !== null) query.created_lte = filter.createdBefore;
+
+            createBrowserHistory().push({
+                pathname: '/paintings',
+                search: queryString.stringify(query),
+            })
+        }, [filter]);
+
 
         const searchPaintings = (str, page) => {
             setSearchQuery(str);
-            getPaintingsBySearchQuery(str, authorId, locationId, createdFrom, createdBefore, page, pageSize);
+            const newFilter = {...filter, searchQuery: str};
+            getPaintingsBySearchQuery(newFilter, pageSize, page);
         };
 
+        const {lightTheme, setLightTheme} = useContext(ThemeContext);
         const setTheme = () => {
             if (!lightTheme) {
                 setLightTheme(true);
@@ -49,10 +75,13 @@ GalleryContainer.propTypes = {
     locations: PropTypes.array,
     currentPage: PropTypes.number,
     pageSize: PropTypes.number,
-    authorId: PropTypes.number,
-    locationId: PropTypes.number,
-    createdFrom: PropTypes.string || PropTypes.object,
-    createdBefore: PropTypes.string || PropTypes.object,
+    filter: PropTypes.shape({
+        searchQuery: PropTypes.string,
+        authorId: PropTypes.number || PropTypes.object,
+        locationId: PropTypes.number || PropTypes.object,
+        createdFrom: PropTypes.string || PropTypes.object,
+        createdBefore: PropTypes.string || PropTypes.object,
+    }),
     getAllInformation: PropTypes.func,
     setSearchQuery: PropTypes.func,
     getPaintingsBySearchQuery: PropTypes.func,
@@ -64,10 +93,7 @@ const mapStateToProps = state => ({
     paintings: state.gallery.paintings,
     currentPage: state.gallery.currentPage,
     pageSize: state.gallery.pageSize,
-    authorId: state.gallery.filter.authorId,
-    locationId: state.gallery.filter.locationId,
-    createdFrom: state.gallery.filter.createdFrom,
-    createdBefore: state.gallery.filter.createdBefore,
+    filter: state.gallery.filter,
 });
 
 export default connect(mapStateToProps,
