@@ -33,7 +33,7 @@ const GalleryContainer =
             if (filter.createdBefore !== null) query.created_lte = filter.createdBefore;
 
             createBrowserHistory().push({
-                pathname: '/paintings',
+                pathname: '/',
                 search: queryString.stringify(query),
             })
         }, [filter]);
