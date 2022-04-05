@@ -1,19 +1,15 @@
 import React, {useEffect} from 'react';
 import Gallery from "./Gallery";
 import {connect} from "react-redux";
-import {
-    getAllInformation,
-    getPaintingsBySearchQuery,
-    searchPaintingsByString,
-    setSearchQuery
-} from "../../store/gallery/galleryReducer";
+import {getAllInformation, getPaintingsBySearchQuery, setSearchQuery} from "../../store/gallery/galleryReducer";
 import * as PropTypes from "prop-types";
 
-const GalleryContainer = ({paintings, authors, locations, currentPage, pageSize, searchQuery, authorId, locationId, createdFrom, createdBefore,
-                              getAllInformation, searchPaintingsByString, setSearchQuery, getPaintingsBySearchQuery}) => {
+const GalleryContainer =
+    ({paintings, authors, locations, currentPage, pageSize, authorId, locationId,
+         createdFrom, createdBefore, getAllInformation, setSearchQuery, getPaintingsBySearchQuery}) => {
 
     useEffect(() => {
-        getAllInformation(searchQuery, pageSize, currentPage);
+        getAllInformation(pageSize, currentPage);
     }, []);
 
     const searchPaintings = (str, page) => {
@@ -46,7 +42,6 @@ const mapStateToProps = state => ({
     paintings: state.gallery.paintings,
     currentPage: state.gallery.currentPage,
     pageSize: state.gallery.pageSize,
-    searchQuery: state.gallery.filter.searchQuery,
     authorId: state.gallery.filter.authorId,
     locationId: state.gallery.filter.locationId,
     createdFrom: state.gallery.filter.createdFrom,
@@ -54,5 +49,4 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps,
-    {getAllInformation, searchPaintingsByString, setSearchQuery, getPaintingsBySearchQuery})
-(GalleryContainer);
+    {getAllInformation, setSearchQuery, getPaintingsBySearchQuery})(GalleryContainer);

@@ -15,11 +15,12 @@
       border-bottom-right-radius: 0;
       border-bottom-color: rgba(255, 255, 255, 0.3);
     }
-  }
-}
 
-.testContainer {
-  overflow: hidden;
+    .selectInputLight {
+      border: 1px solid black;
+      border-bottom-color: rgba(0, 0, 0, 0.3);
+    }
+  }
 }
 
 .selectInput {
@@ -35,6 +36,12 @@
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+}
+
+.selectInputLight {
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  color: #000000;
 }
 
 .selectText {
@@ -56,12 +63,19 @@
   border-top: none;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  background: rgb(12, 12, 12);
+  background: #0C0C0C;
   position: absolute;
   top: $input-height;
   left: 0;
   right: 0;
   z-index: 1;
+}
+
+.dropdownLight {
+  background: white;
+  color: black;
+  border: 1px solid #000000;
+  border-top: none;
 }
 
 .selectList {
@@ -76,11 +90,20 @@
     padding: 10px 30px;
     cursor: pointer;
     overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     &:hover {
       background-color: #FFFFFF;
       color: black;
     }
+  }
+}
+
+.selectListLight {
+  li:hover {
+    background-color: black;
+    color: #FFFFFF;
   }
 }
 

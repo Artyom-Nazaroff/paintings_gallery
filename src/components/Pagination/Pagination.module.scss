@@ -46,7 +46,7 @@
 
   &:nth-child(1),
   &:nth-child(2) {
-    img {
+    svg {
       transform: rotateZ(180deg);
     }
   }
@@ -65,6 +65,48 @@
   color: black;
   &:hover {
     background-color: white;
+  }
+}
+
+.lightButton {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  color: black;
+
+  &:hover {
+    background-color: #EDEDED;
+  }
+
+  &:not(:last-child) {
+    border-right: 1px solid black;
+  }
+  &:not(:last-child).disabled {
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+  }
+
+  &:first-child {
+    border-left: 1px solid black;
+  }
+  &:first-child.disabled {
+    border-left: 1px solid rgba(0, 0, 0, 0.3);
+  }
+  &:last-child {
+    border-right: 1px solid black;
+  }
+  &:last-child.disabled {
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+  }
+
+  &.disabled {
+    border-color: rgba(0, 0, 0, 0.3);
+  }
+
+  &.active {
+    background-color: black;
+    color: white;
+    &:hover {
+      background-color: black;
+    }
   }
 }
 

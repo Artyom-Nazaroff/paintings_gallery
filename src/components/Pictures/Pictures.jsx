@@ -2,7 +2,7 @@ import React from 'react';
 import styles from "./Pictures.module.scss";
 
 const Pictures = ({paintings, authors, locations}) => {
-    // Использовать useMemo();
+
     const identifyAuthor = (id) => {
         const author = authors.filter(item => item.id === id)[0];
         return author.name;
@@ -13,7 +13,6 @@ const Pictures = ({paintings, authors, locations}) => {
         return location.location;
     };
 
-    if (!paintings) return null;
     return (
         <div className={styles.gallery}>
             {paintings.map(el =>

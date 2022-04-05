@@ -4,8 +4,8 @@ import {getPaintingsBySearchQuery, setCreatedBefore, setCreatedFrom} from "../..
 import SelectRange from "./SelectRange";
 
 
-const SelectRangeContainer = ({inputText, items, pageSize, searchQuery, authorId, locationId, createdFrom, createdBefore,
-                                 setAuthor, setLocation, setAuthorQuery, setLocationQuery, getPaintingsBySearchQuery, setCreatedFrom, setCreatedBefore}) => {
+const SelectRangeContainer = ({inputText, items, pageSize, searchQuery, authorId, locationId,
+                                  getPaintingsBySearchQuery, setCreatedFrom, setCreatedBefore}) => {
 
     const chooseDatesRange = (from = null, before = null, page) => {
         setCreatedFrom(from);
@@ -24,17 +24,12 @@ const SelectRangeContainer = ({inputText, items, pageSize, searchQuery, authorId
     );
 };
 
-const mapStateToProps = state => {
-    return {
-        pageSize: state.gallery.pageSize,
-        searchQuery: state.gallery.filter.searchQuery,
-        authorId: state.gallery.filter.authorId,
-        locationId: state.gallery.filter.locationId,
-        createdFrom: state.gallery.filter.createdFrom,
-        createdBefore: state.gallery.filter.createdBefore,
-    }
-};
+const mapStateToProps = state => ({
+    pageSize: state.gallery.pageSize,
+    searchQuery: state.gallery.filter.searchQuery,
+    authorId: state.gallery.filter.authorId,
+    locationId: state.gallery.filter.locationId,
+});
 
 export default connect(mapStateToProps,
-    {getPaintingsBySearchQuery, setCreatedFrom, setCreatedBefore})
-(SelectRangeContainer);
+    {getPaintingsBySearchQuery, setCreatedFrom, setCreatedBefore})(SelectRangeContainer);

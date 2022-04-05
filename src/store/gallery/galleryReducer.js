@@ -66,48 +66,21 @@ export const setCurrentPage = (page) => ({type: SET_CURRENT_PAGE, page});
 export const setTotalItemsCount = (amount) => ({type: SET_TOTAL_ITEMS_COUNT, amount});
 export const setPaintings = (items) => ({type: SET_PAINTINGS, items});
 export const setSearchQuery = (str) => ({type: SET_SEARCH_QUERY, str});
-export const setAuthorQuery = (id) => ({type: SET_AUTHOR, id});
-export const setLocationQuery = (id) => ({type: SET_LOCATION, id});
+export const setAuthor = (id) => ({type: SET_AUTHOR, id});
+export const setLocation = (id) => ({type: SET_LOCATION, id});
 export const setCreatedFrom = (year) => ({type: SET_CREATED_FROM, year});
 export const setCreatedBefore = (year) => ({type: SET_CREATED_BEFORE, year});
 
 
-export const getAllInformation = (str, pageSize, currentPage) => async dispatch => {
-    const paintings = await api.getPaintings(str, pageSize, currentPage);
+export const getAllInformation = (pageSize, currentPage) => async dispatch => {
+    const paintings = await api.getPaintings(pageSize, currentPage);
     dispatch(setTotalItemsCount(paintings.headers['x-total-count']));
     const authors = await api.getAuthors();
     const locations = await api.getLocations();
     dispatch(setAllInformation(paintings.data, authors.data, locations.data));
 };
-export const getPictures = (str, pageSize, currentPage) => async dispatch => {
-    dispatch(setCurrentPage(currentPage));
-    const paintings = await api.getPaintings(str, pageSize, currentPage);
-    dispatch(setPaintings(paintings.data));
-};
-export const setAuthor = (id) => async dispatch => {
-    const authorPaintings = await api.getAuthorPaintings(id);
-    dispatch(setTotalItemsCount(authorPaintings.data.length));
-    dispatch(setCurrentPage(1));
-    dispatch(setPaintings(authorPaintings.data));
-};
-export const setLocation = (id) => async dispatch => {
-    const locations = await api.getLocationPaintings(id);
-    dispatch(setTotalItemsCount(locations.data.length));
-    dispatch(setCurrentPage(1));
-    dispatch(setPaintings(locations.data));
-};
-export const searchPaintingsByString = (str, page, pageSize) => async dispatch => {
-    dispatch(setSearchQuery(str));
-    const paintings = await api.searchPainting(str, page, pageSize);
-    dispatch(setTotalItemsCount(paintings.headers['x-total-count']));
-    dispatch(setCurrentPage(1));
-    dispatch(setPaintings(paintings.data));
-};
-
-
 export const getPaintingsBySearchQuery = (str, author, location, from, before, page, pageSize) => async dispatch => {
     const paintings = await api.searchQuery(str, author, location, from, before, page, pageSize);
     dispatch(setTotalItemsCount(paintings.headers['x-total-count']));
-    // dispatch(setCurrentPage(1));
     dispatch(setPaintings(paintings.data));
 };

@@ -9,11 +9,18 @@
     .selectDropdown {
       display: block;
     }
+
     .selectInput {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
       border-bottom: none;
       background: rgb(12, 12, 12);
+    }
+
+    .selectInputLight {
+      background: white;
+      border: 1px solid black;
+      border-bottom: none;
     }
   }
 }
@@ -30,6 +37,11 @@
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+}
+
+.selectInputLight {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  color: black;
 }
 
 .selectText {
@@ -59,6 +71,12 @@
   padding: 20px 0;
 }
 
+.dropdownLight {
+  background: white;
+  border: 1px solid black;
+  border-top: none;
+}
+
 .dropdownInner {
   display: flex;
   flex-direction: column;
@@ -81,6 +99,18 @@
     padding: 15px 0;
     line-height: 0;
   }
+}
+
+.innerLight {
+  input {
+    background: #EFEFEF;
+    color: rgba(0, 0, 0, 0.3);
+  }
+
+  span {
+    color: black;
+  }
+
 }
 
 @media (min-width: 640px) {

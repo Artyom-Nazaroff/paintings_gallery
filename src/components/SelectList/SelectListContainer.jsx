@@ -1,17 +1,11 @@
 import React from 'react';
 import SelectList from "./SelectList";
 import {connect} from "react-redux";
-import {
-    getPaintingsBySearchQuery,
-    setAuthor,
-    setAuthorQuery,
-    setLocation,
-    setLocationQuery
-} from "../../store/gallery/galleryReducer";
+import {getPaintingsBySearchQuery, setAuthor, setLocation} from "../../store/gallery/galleryReducer";
 
 
 const SelectListContainer = ({inputText, items, pageSize, searchQuery, authorId, locationId, createdFrom, createdBefore,
-                                 setAuthor, setLocation, setAuthorQuery, setLocationQuery, getPaintingsBySearchQuery}) => {
+                                 setAuthorQuery, setLocationQuery, getPaintingsBySearchQuery}) => {
 
     const chooseAuthor = (id, page) => {
         setAuthorQuery(id);
@@ -44,5 +38,4 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps,
-    {setAuthor, setLocation, setAuthorQuery, setLocationQuery, getPaintingsBySearchQuery})
-(SelectListContainer);
+    {setAuthorQuery: setAuthor, setLocationQuery: setLocation, getPaintingsBySearchQuery})(SelectListContainer);
