@@ -8,24 +8,25 @@ import SelectListContainer from "../SelectList/SelectListContainer";
 import SearchInput from "../SearchInput/SearchInput";
 import SelectRangeContainer from "../SelectRange/SelectRangeContainer";
 import {ThemeContext} from "../../context/themeContext";
+import * as PropTypes from "prop-types";
 
-const Gallery = ({authors, locations, paintings, searchPaintings}) => {
-    const {lightTheme, setLightTheme} = useContext(ThemeContext);
+const Gallery = ({authors, locations, paintings, searchPaintings, setTheme}) => {
+    const {lightTheme} = useContext(ThemeContext);
 
     return (
         <div className={cn(styles.wrapper, {[styles.wrapperLight]: lightTheme})}>
             <header className={styles.header}>
-                <div className={styles.headerLogo}>
+                <div>
                     <img src={logo} alt="logo"/>
                 </div>
                 <div
                     className={styles.themeSwitcher}
-                    onClick={() => setLightTheme(!lightTheme)}
+                    onClick={() => setTheme()}
                 >
                     {sun(lightTheme? 'black' : 'white')}
                 </div>
             </header>
-            <main className={styles.content}>
+            <main>
                 <div className={styles.filters}>
                     <SearchInput
                         searchPaintings={searchPaintings}
@@ -49,7 +50,15 @@ const Gallery = ({authors, locations, paintings, searchPaintings}) => {
             </main>
         </div>
     );
-}
+};
+
+Gallery.propTypes = {
+    paintings: PropTypes.array,
+    authors: PropTypes.array,
+    locations: PropTypes.array,
+    searchPaintings: PropTypes.func,
+    setTheme: PropTypes.func,
+};
 
 export default Gallery;
 

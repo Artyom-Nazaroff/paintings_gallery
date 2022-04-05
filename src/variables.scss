@@ -1,2 +1,22 @@
-$input-bc: 0C0C0C;
-$input-height: 48px;
+//===Light/dark themes===
+
+$darkSelectOpenedBC: rgb(12, 12, 12);
+$darkSelectBorder: white;
+$lightSelectBorder: rgba(0, 0, 0, 0.3);
+$lightSelectOpenedBorder: black;
+$darkSelectBC: #0C0C0C;
+$lightSelectBC: white;
+
+$darkBtnDisabled: rgba(255, 255, 255, 0.3);
+$lightBtnDisabled: rgba(0, 0, 0, 0.3);
+
+$darkBtnActive: white;
+$lightBtnActive: black;
+
+
+//===Select===
+
+$borderRadius: 8px;
+$inputHeight: 48px;
+
+

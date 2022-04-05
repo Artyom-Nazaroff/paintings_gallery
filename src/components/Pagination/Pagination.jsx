@@ -2,6 +2,7 @@ import React, {useContext, useMemo, useState} from 'react';
 import styles from './Pagination.module.scss';
 import cn from 'classnames';
 import {ThemeContext} from "../../context/themeContext";
+import * as PropTypes from "prop-types";
 
 const Pagination = ({currentPage, pageSize, totalItemsCount, onPageChanged}) => {
     const [isLeftDisabled, setIsLeftDisabled] = useState(true);
@@ -117,6 +118,13 @@ const Pagination = ({currentPage, pageSize, totalItemsCount, onPageChanged}) => 
             </div>
         </div>
     );
+};
+
+Pagination.propTypes = {
+    currentPage: PropTypes.number,
+    pageSize: PropTypes.number,
+    totalItemsCount: PropTypes.any,
+    onPageChanged: PropTypes.func,
 };
 
 export default Pagination;

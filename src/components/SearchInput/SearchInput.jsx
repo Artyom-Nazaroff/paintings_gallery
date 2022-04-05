@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react';
 import styles from "./SearchInput.module.scss";
 import cn from 'classnames';
 import {ThemeContext} from "../../context/themeContext";
+import * as PropTypes from "prop-types";
 
 const SearchInput = ({searchPaintings}) => {
     const [text, setText] = useState('');
@@ -28,5 +29,9 @@ const SearchInput = ({searchPaintings}) => {
         </>
     );
 };
+
+SearchInput.propTypes = {
+    searchPaintings: PropTypes.func,
+}
 
 export default SearchInput;

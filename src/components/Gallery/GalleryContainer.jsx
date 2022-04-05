@@ -1,40 +1,62 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import Gallery from "./Gallery";
 import {connect} from "react-redux";
-import {getAllInformation, getPaintingsBySearchQuery, setSearchQuery} from "../../store/gallery/galleryReducer";
+import {getAllInformation, getPaintingsBySearchQuery, setSearchQuery} from "../../store/gallery/actions";
 import * as PropTypes from "prop-types";
+import {ThemeContext} from "../../context/themeContext";
 
 const GalleryContainer =
     ({paintings, authors, locations, currentPage, pageSize, authorId, locationId,
          createdFrom, createdBefore, getAllInformation, setSearchQuery, getPaintingsBySearchQuery}) => {
 
-    useEffect(() => {
-        getAllInformation(pageSize, currentPage);
-    }, []);
+        const {lightTheme, setLightTheme} = useContext(ThemeContext);
 
-    const searchPaintings = (str, page) => {
-        setSearchQuery(str);
-        getPaintingsBySearchQuery(str, authorId, locationId, createdFrom, createdBefore, page, pageSize);
-    };
+        useEffect(() => {
+            getAllInformation(pageSize, currentPage);
+        }, []);
 
-    return (
-        <div>
-            <Gallery
-                authors={authors}
-                locations={locations}
-                paintings={paintings}
-                searchPaintings={searchPaintings}
-            />
-        </div>
-    );
-}
+        const searchPaintings = (str, page) => {
+            setSearchQuery(str);
+            getPaintingsBySearchQuery(str, authorId, locationId, createdFrom, createdBefore, page, pageSize);
+        };
+
+        const setTheme = () => {
+            if (!lightTheme) {
+                setLightTheme(true);
+                localStorage.setItem('lightTheme', 'true');
+            } else if (lightTheme) {
+                setLightTheme(false);
+                localStorage.removeItem('lightTheme');
+            }
+        };
+
+        return (
+            <div>
+                <Gallery
+                    authors={authors}
+                    locations={locations}
+                    paintings={paintings}
+                    searchPaintings={searchPaintings}
+                    setTheme={setTheme}
+                />
+            </div>
+        );
+    }
 
 GalleryContainer.propTypes = {
-    authors: PropTypes.any,
-    locations: PropTypes.any,
-    paintings: PropTypes.any,
-    getAllInformation: PropTypes.any
-}
+    paintings: PropTypes.array,
+    authors: PropTypes.array,
+    locations: PropTypes.array,
+    currentPage: PropTypes.number,
+    pageSize: PropTypes.number,
+    authorId: PropTypes.number,
+    locationId: PropTypes.number,
+    createdFrom: PropTypes.string || PropTypes.object,
+    createdBefore: PropTypes.string || PropTypes.object,
+    getAllInformation: PropTypes.func,
+    setSearchQuery: PropTypes.func,
+    getPaintingsBySearchQuery: PropTypes.func,
+};
 
 const mapStateToProps = state => ({
     authors: state.gallery.authors,

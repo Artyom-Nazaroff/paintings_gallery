@@ -1,18 +1,19 @@
 import React from 'react';
 import SelectList from "./SelectList";
 import {connect} from "react-redux";
-import {getPaintingsBySearchQuery, setAuthor, setLocation} from "../../store/gallery/galleryReducer";
+import {getPaintingsBySearchQuery, setAuthor, setLocation} from "../../store/gallery/actions";
+import * as PropTypes from "prop-types";
 
 
 const SelectListContainer = ({inputText, items, pageSize, searchQuery, authorId, locationId, createdFrom, createdBefore,
-                                 setAuthorQuery, setLocationQuery, getPaintingsBySearchQuery}) => {
+                                 setAuthor, setLocation, getPaintingsBySearchQuery}) => {
 
     const chooseAuthor = (id, page) => {
-        setAuthorQuery(id);
+        setAuthor(id);
         getPaintingsBySearchQuery(searchQuery, id, locationId, createdFrom, createdBefore, page, pageSize);
     };
     const chooseLocation = (id, page) => {
-        setLocationQuery(id);
+        setLocation(id);
         getPaintingsBySearchQuery(searchQuery, authorId, id, createdFrom, createdBefore, page, pageSize);
     };
 
@@ -28,6 +29,20 @@ const SelectListContainer = ({inputText, items, pageSize, searchQuery, authorId,
     );
 };
 
+SelectListContainer.propTypes = {
+    inputText: PropTypes.string,
+    items: PropTypes.array,
+    pageSize: PropTypes.number,
+    searchQuery: PropTypes.string,
+    authorId: PropTypes.number,
+    locationId: PropTypes.number,
+    createdFrom: PropTypes.string || PropTypes.object,
+    createdBefore: PropTypes.string || PropTypes.object,
+    setAuthor: PropTypes.func,
+    setLocation: PropTypes.func,
+    getPaintingsBySearchQuery: PropTypes.func,
+};
+
 const mapStateToProps = state => ({
     pageSize: state.gallery.pageSize,
     searchQuery: state.gallery.filter.searchQuery,
@@ -38,4 +53,4 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps,
-    {setAuthorQuery: setAuthor, setLocationQuery: setLocation, getPaintingsBySearchQuery})(SelectListContainer);
+    {setAuthor, setLocation, getPaintingsBySearchQuery})(SelectListContainer);

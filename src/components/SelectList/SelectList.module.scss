@@ -1,4 +1,5 @@
 @import "./src/variables";
+@import "./src/tamplates";
 
 .select {
   width: 100%;
@@ -17,29 +18,18 @@
     }
 
     .selectInputLight {
-      border: 1px solid black;
+      border: 1px solid $lightSelectOpenedBorder;
       border-bottom-color: rgba(0, 0, 0, 0.3);
     }
   }
 }
 
 .selectInput {
-  height: $input-height;
-  background: $input-bc;
-  border: 1px solid #FFFFFF;
-  box-sizing: border-box;
-  font-size: 14px;
-  border-radius: 8px;
-  padding: 15px 10px 15px 15px;
-  overflow: hidden;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
+  @extend %tplDarkSelectInput;
 }
 
 .selectInputLight {
-  background: #FFFFFF;
+  background: $lightSelectBC;
   border: 1px solid rgba(0, 0, 0, 0.3);
   color: #000000;
 }
@@ -56,23 +46,12 @@
 }
 
 .selectDropdown {
-  display: none;
-  max-height: 300px;
-  overflow-y: auto;
-  border: 1px solid #FFFFFF;
-  border-top: none;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  background: #0C0C0C;
-  position: absolute;
-  top: $input-height;
-  left: 0;
-  right: 0;
-  z-index: 1;
+  @extend %tplDarkSelectDropdown;
+  background: $darkSelectBC;
 }
 
 .dropdownLight {
-  background: white;
+  background: $lightSelectBC;
   color: black;
   border: 1px solid #000000;
   border-top: none;

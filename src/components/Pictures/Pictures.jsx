@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from "./Pictures.module.scss";
+import * as PropTypes from "prop-types";
 
 const Pictures = ({paintings, authors, locations}) => {
 
@@ -34,6 +35,12 @@ const Pictures = ({paintings, authors, locations}) => {
             )}
         </div>
     );
+};
+
+Pictures.propTypes = {
+    paintings: PropTypes.array,
+    authors: PropTypes.array,
+    locations: PropTypes.array,
 };
 
 export default Pictures;

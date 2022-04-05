@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useRef, useState} from 'react';
 import styles from './SelectList.module.scss';
 import cn from 'classnames';
 import {ThemeContext} from "../../context/themeContext";
+import * as PropTypes from "prop-types";
 
 const SelectList = ({inputText, items, chooseAuthor, chooseLocation}) => {
     const [isOpened, setIsOpened] = useState(false);
@@ -60,6 +61,13 @@ const SelectList = ({inputText, items, chooseAuthor, chooseLocation}) => {
             </div>
         </div>
     );
+};
+
+SelectList.propTypes = {
+    inputText: PropTypes.string,
+    items: PropTypes.array,
+    chooseAuthor: PropTypes.func,
+    chooseLocation: PropTypes.func,
 };
 
 export default SelectList;

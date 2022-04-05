@@ -1,3 +1,5 @@
+@import "../../variables";
+
 .paginationWrapper {
   width: 280px;
   height: 41px;
@@ -24,7 +26,7 @@
     border-right: 1px solid white;
   }
   &:not(:last-child).disabled {
-    border-right: 1px solid rgba(255, 255, 255, 0.3);
+    border-right: 1px solid $darkBtnDisabled;
   }
 
   &:first-child {
@@ -33,7 +35,7 @@
     border-bottom-left-radius: 10px;
   }
   &:first-child.disabled {
-    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    border-left: 1px solid $darkBtnDisabled;
   }
   &:last-child {
     border-right: 1px solid white;
@@ -41,7 +43,7 @@
     border-bottom-right-radius: 10px;
   }
   &:last-child.disabled {
-    border-right: 1px solid rgba(255, 255, 255, 0.3);
+    border-right: 1px solid $darkBtnDisabled;
   }
 
   &:nth-child(1),
@@ -54,19 +56,20 @@
 
 .disabled {
   pointer-events: none;
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: $darkBtnDisabled;
   &:hover {
     background-color: inherit;
   }
 }
 
 .active {
-  background-color: white;
+  background-color: $darkBtnActive;
   color: black;
   &:hover {
-    background-color: white;
+    background-color: $darkBtnActive;
   }
 }
+
 
 .lightButton {
   border-top: 1px solid black;
@@ -81,34 +84,35 @@
     border-right: 1px solid black;
   }
   &:not(:last-child).disabled {
-    border-right: 1px solid rgba(0, 0, 0, 0.3);
+    border-right: 1px solid $lightBtnDisabled;
   }
 
   &:first-child {
     border-left: 1px solid black;
   }
   &:first-child.disabled {
-    border-left: 1px solid rgba(0, 0, 0, 0.3);
+    border-left: 1px solid $lightBtnDisabled;
   }
   &:last-child {
     border-right: 1px solid black;
   }
   &:last-child.disabled {
-    border-right: 1px solid rgba(0, 0, 0, 0.3);
+    border-right: 1px solid $lightBtnDisabled;
   }
 
   &.disabled {
-    border-color: rgba(0, 0, 0, 0.3);
+    border-color: $lightBtnDisabled;
   }
 
   &.active {
-    background-color: black;
+    background-color: $lightBtnActive;
     color: white;
     &:hover {
-      background-color: black;
+      background-color: $lightBtnActive;
     }
   }
 }
+
 
 @media (min-width: 640px) {
   .paginationWrapper {

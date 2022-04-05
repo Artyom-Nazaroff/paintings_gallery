@@ -1,2 +1,31 @@
 @import "./variables";
 
+%tplDarkSelectDropdown {
+  display: none;
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid $darkSelectBorder;
+  border-top: none;
+  border-bottom-left-radius: $borderRadius;
+  border-bottom-right-radius: $borderRadius;
+  position: absolute;
+  top: $inputHeight;
+  left: 0;
+  right: 0;
+  z-index: 1;
+};
+
+%tplDarkSelectInput {
+  height: $inputHeight;
+  background: $darkSelectBC;
+  border: 1px solid $darkSelectBorder;
+  box-sizing: border-box;
+  font-size: 14px;
+  border-radius: $borderRadius;
+  padding: 15px 10px 15px 15px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+};
